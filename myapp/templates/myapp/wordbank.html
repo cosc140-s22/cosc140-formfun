@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block sidebar %}
+{% endblock %}
+
+{% block content %}
+<div>word translations
+    <table class="table">
+        <thead>
+            <tr>
+                <th>English</th>
+                <th>Welsh</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in wordbank %}
+            <tr>
+                <td>{{ entry.english }}</td>
+                <td>{{ entry.welsh }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <p>Create a new entry</p>
+<form action="{% url 'wordbank' %}" method="post">
+  {% csrf_token %}  <!-- this is necessary for post forms -->
+  {{ form.as_p }}        <!-- renders the form widgets -->
+  <input type="submit" value="Submit">
+</form>
+
+</div>
+
+{% endblock %}
+
