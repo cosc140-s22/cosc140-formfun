@@ -9,7 +9,6 @@ def formfun(request):
             'e2': 'nope',
             'e3': 'nope',
             'e4': 'nope',
-            'e5': 'nope',
             'form': MyForm()
             }
     if request.method == 'GET':
@@ -21,10 +20,9 @@ def formfun(request):
         else:
             print("Invalid!")
         context['e1'] = len(f.cleaned_data) == 3
-        context['e2'] = f.is_valid()
-        context['e3'] = f.cleaned_data['two'] == -1
-        context['e4'] = 'nope' # len(f.cleaned_data['three']) > 0
-        context['e5'] = len(f.errors) == 2
+        context['e2'] = 'x' in f.cleaned_data
+        context['e3'] = 'two' in f.cleaned_data
+        context['e4'] = f.cleaned_data["three"][:2].upper() == "BO"
 
     return render(request, 'myapp/formfun.html', context=context)
 
